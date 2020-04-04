@@ -4,13 +4,13 @@
 <!-- Metadata -->
 <head>
   <meta charset="utf-8">
-  
+
   <!-- Title -->
   <title>Project Team SBN3: Directory Data, DS 4200 S20</title>
-  
+
   <!-- CSS Styling -->
   <link rel="stylesheet" href="style.css">
- 
+
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
@@ -27,35 +27,35 @@
 
   <!-- Update this with your GitHub repo URL -->
   <span id="forkongithub"><a href="https://github.com/Northeastern-DS-4200-S20-Staff/S-L-Project-Template">Fork me on GitHub</a></span>
-  
+
   <!-- Your writeup goes here -->
   <div class = "content-column">
-  
+
     <h1>Project Team SBN3: Directory Data, DS 4200 S20</h1>
-    
+
     <p><strong>Carson Cook</strong>, <strong>Divit Koradia</strong>, <strong>Prisca Joseph</strong>, <strong>Ruisong Wang </strong></p>
-    
+
     <p>Service-Learning Course Project as part of <a href="https://canvas.instructure.com/courses/1781714">DS 4200: Information Presentation and Visualization</a>, taught by <a href="https://www.eecs.tufts.edu/~dcashm01/">Prof. Dylan Cashman</a>, <a href="https://visualization.khoury.northeastern.edu/">Data Visualization @ Khoury</a>, <a href="https://www.khoury.northeastern.edu/">Northeastern University</a>.</p>
-    
-    
+
+
     <h1>Motivation</h1>
-    
+
     <p><em>Our goal is to showcase the local communities of New England and the various businesses that contribute to SBN goals so that people can learn more about these organizations and hopefully support them. We have created a visualization that allows a user to explore all the organizations working with SBN by zooming in and out of the map or by clicking on the table below to find the further information of a business.
     </em></p>
 
-    
+
     <h1>Visualization</h1>
       <div id=“vis-container”>
       <div id=“map-container”></div>
      </div>
     
     <p><em>Include the interactive visualization as part of this page. Static example follows.</em></p>
-    
+
   </div>
-  
+
   <!-- Your visualization here -->
   <div class="vis-holder">
-    <!-- Change viewbox to whatever you want, e.g. "0 0 1000 6000" This determines your aspect ratio and coordinate system -->    
+    <!-- Change viewbox to whatever you want, e.g. "0 0 1000 6000" This determines your aspect ratio and coordinate system -->
     <!-- Delete all the sample SVG code below after the viewbox to before the closing tag. Populate this part of the SVG with D3. -->
     <!--<svg id="vis-svg"
       preserveAspectRatio="xMidYMid meet" class="marks" viewBox="0 0 821 520" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> -->
@@ -63,14 +63,14 @@
     <!-- Don't delete the closing tag! -->
     </svg>
   </div>
-  
+
   <!-- Your writeup goes here -->
   <div class = "content-column">
 
     <h1>Demo Video</h1>
-    
+
     <p><em>Embedded MP4 demo video using the HTML5 &lt;video&gt; tag. For example, this screen recording Prof. Cody Dunne made of Mike Bostock's flexible transitions in D3 slide:</em></p>
-    
+
     <video controls width="100%">
       <source src="http://www.ccs.neu.edu/home/cody/courses/shared/d3-flexible-transitions.mp4" type="video/mp4">
       <p>Your browser doesn't support HTML5 video. Here is
@@ -78,47 +78,59 @@
     </video>
 
     <h1>Visualization explanation</h1>
-    
+
     <p><em>Final visualization screenshots (PNG images), design justifications, UI walk-through, and linked presentation slides.</em></p>
 
     <h1>Data Analysis</h1>
-    <p><em>Summary of data, data types, and data preprocessing.</em></p>
-
-    <p><em>Expectation: Data sources match the problem statement and are appropriate. These descriptions should be very explicit so someone could read your page and properly reproduce your results.</em></p>
+    <p><b>Summary of data</b></p>
+    <p><em>The data given to us by SBN gives an overview of the members in the network including some basic information about each member. There are columns for the member type, name of the business or organization, product/service type, address information, phone number and email. The majority of the data given was categorical. </em></p>
+    <p><b>Data Preprocessing</b></p>
+    <p><em>
+    We found that several of the columns lacked information. Specifically, the address column was missing data for nearly 30 organizations. We were able to fill in most of the missing data simply by searching for the information on Google. However, some organizations still had missing addresses and we assume that is because they lack a physical (brick and mortar) presence.
+    </em></p>
+    <p><em>After we finalized our dataset, we started working on creating our visualization!</em></p>
 
     <h1>Task Analysis</h1>
 
-    <p><em>Summary of task table.</em></p>
+    <p><em>There are various business in the local community of New England. SBN is willing to build up a strong connection among them to facilitate their collaboration and establish conducive business environments. Our domain task is to clearly showcase the organizations to everyone who will use our visualization.</em></p>
 
-    <p><em>Expectation: Clearly describes domain tasks, processes, goals and abstract tasks for domain problems.</em></p>
+    <p><em>We intend to help users to gain awareness of the location, business and contact information by utilizing interactive map and table. Users are allowed to zoom in and out and gather any further information they want by playing with the visualization.</em></p>
+
+    <p><em>Our visualization aims to clearly 'present' and make a 'summary/overview' about the local business in the community of New England. Users can 'explore' information they want from our visualization.</em></p>
 
     <h1>Design Process</h1>
-    
-    <p><em>Sketches and design choices to justify final visualization.</em></p>
 
-    <p><em>Expectation: Evidence of iterative improvement.
-    Logical discussion of design choices grounded in theory from course.
-    Discusses feedback from usability testing.</em></p>
+    <p><em>We designed our visualization iteratively through first finding examples, then making a sketch, and finally creating a mockup in Tableau</em></p>
+
+    <p>Example visualization from <a href="https://www.geopointe.com/features/">here</a></p>
+
+    <img src="images\example_image.png" style="width:500px;" alt="Example image from https://www.geopointe.com/features/">
+
+    <p>Illustrated map by Ruisong</p>
+    <img src="images\ruisong_map.png" style="width:500px;" alt="Illustrated map">
+
+    <p>Mockup in Tableau</p>
+    <img src="images\mockup.png" style="width:500px;" alt="Mockup in Tableau">
 
 
     <h1>Conclusion</h1>
 
     <p><em>Short summary of work completed and areas for improvement/future-work.</em></p>
-    
+
     <p><em>Expectation: Meaningfully wraps up project and has good future directions.</em></p>
 
-    
+
     <h1>Acknowledgments</h1>
 
     <p><em>List here where any code, packages/libraries, text, images, designs, etc. that you leverage come from.</em></p>
-    
+
     <ul>
       <li><a href="https://d3js.org/">D3: Data-Driven Documents</a> by Mike Bostock.</li>
       <li><a href="https://codepo8.github.io/css-fork-on-github-ribbon/#">Pure CSS responsive "Fork me on GitHub" ribbon</a> by Chris Heilmann.</li>
     </ul>
-    
+
   </div>
-  
+
   <!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
   <script src="lib/d3.v4/d3.v4.js"></script>
   <script src="js/visualization.js"></script>
