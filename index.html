@@ -9,7 +9,7 @@
   <title>Project Team SBN3: Directory Data, DS 4200 S20</title>
 
   <!-- CSS Styling -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 
   <!-- Favicons -->
   <link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon.png">
@@ -45,10 +45,8 @@
 
 
     <h1>Visualization</h1>
-      <div id=“vis-container”>
-      <div id=“map-container”></div>
-     </div>
-    
+
+
     <p><em>Include the interactive visualization as part of this page. Static example follows.</em></p>
 
   </div>
@@ -57,9 +55,9 @@
   <div class="vis-holder">
     <!-- Change viewbox to whatever you want, e.g. "0 0 1000 6000" This determines your aspect ratio and coordinate system -->
     <!-- Delete all the sample SVG code below after the viewbox to before the closing tag. Populate this part of the SVG with D3. -->
-    <!--<svg id="vis-svg"
-      preserveAspectRatio="xMidYMid meet" class="marks" viewBox="0 0 821 520" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> -->
-    
+    <svg id="vis-svg"
+      preserveAspectRatio="xMidYMid meet" class="marks" viewBox="0 0 821 520" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+
     <!-- Don't delete the closing tag! -->
     </svg>
   </div>
@@ -134,5 +132,7 @@
   <!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
   <script src="lib/d3.v4/d3.v4.js"></script>
   <script src="js/visualization.js"></script>
+
+  <script src="https://d3js.org/topojson.v3.min.js"></script>
 </body>
 </html>
