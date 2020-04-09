@@ -1,7 +1,7 @@
 //Immediately Invoked Function Expression to limit access to our
 // variables and prevent
-var width = 960;
-var height = 500;
+var width = 400;
+var height = 400;
 
 var svg = d3
 .select("#vis-svg")
@@ -22,15 +22,17 @@ var path = d3.geoPath().projection(projection);
 var zoom = d3.zoom()
 .scaleExtent([1, 80])
 .on("zoom", zoomed);
+// translate(-1296.4392968337975,-601.2308973885007) scale(4.972598675615854)
 
 var button = d3.select("#toggleBrush");
 var brushEnabled = false;
 
 function toggleBrush() {
   if (brushEnabled) {
-    button.attr("value", "Enable Brushing");
+    button.attr("value", "Disable Zooming");
+    // svg.append("g").call(brush); << appears after clicking button twice
   } else {
-    button.attr("value", "Disable Brushing");
+    button.attr("value", "Zoom over Map");
   }
   brushEnabled = !brushEnabled;
 }
@@ -38,11 +40,20 @@ function toggleBrush() {
 d3.json("us.json", function(us) {
   d3.csv("data/SBN3DataMap.csv", function(data) {
     drawMap(us, data);
+    
+    /*let tableData = table()
+    .selectionDispatcher(d3.dispatch(dispatchString))
+    ("#table", data);
+
+    tableData.selectionDispatcher().on(dispatchString, function(selectedData){
+      // TODO: fill in with map data, brushing */
   });
 });
 
 var mapGroup = svg.append("g").attr("class", "mapGroup");
 svg.call(zoom);
+
+// var tableGroup = svg.append("g").attr("class", "tableGroup");
 
 var brush = d3
 .brush()
@@ -84,7 +95,7 @@ function drawMap(us, data) {
     return projection([d.long, d.lat])[1];
   });
 
-
+  svg.append("g").call(brush);
 }
 
 function highlight() {
@@ -102,11 +113,16 @@ function highlight() {
     y0 <= projection([d.long, d.lat])[1] &&
     projection([d.long, d.lat])[1] <= y1
   );
+
+  console.log(circles.classed());
+
 }
 
 function brushend() {
   console.log("end");
 }
+
+mapGroup.attr("transform", "translate(-1296.4392968337975,-601.2308973885007) scale(4.972598675615854)");
 
 function zoomed() {
   if (!brushEnabled){
