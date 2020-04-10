@@ -38,9 +38,9 @@ function toggleBrush() {
 }
 
 d3.json("us.json", function(us) {
-  d3.csv("data/SBN3DataMap.csv", function(data) {
+  d3.csv("data/SBN3Data.csv", function(data) {
     drawMap(us, data);
-    
+
     /*let tableData = table()
     .selectionDispatcher(d3.dispatch(dispatchString))
     ("#table", data);
@@ -89,10 +89,18 @@ function drawMap(us, data) {
   .append("circle")
   .attr("class", "adds")
   .attr("cx", function(d) {
-    return projection([d.long, d.lat])[0];
+    if (projection([d.long, d.lat]) != null) {
+      return projection([d.long, d.lat])[0];
+    } else {
+      return null
+    }
   })
   .attr("cy", function(d) {
-    return projection([d.long, d.lat])[1];
+    if (projection([d.long, d.lat]) != null) {
+      return projection([d.long, d.lat])[1];
+    } else {
+      return null
+    }
   });
 
   svg.append("g").call(brush);
@@ -105,14 +113,16 @@ function highlight() {
 
   circles = d3.selectAll("circle");
 
-  circles.classed(
-    "selected",
-    d =>
-    x0 <= projection([d.long, d.lat])[0] &&
-    projection([d.long, d.lat])[0] <= x1 &&
-    y0 <= projection([d.long, d.lat])[1] &&
-    projection([d.long, d.lat])[1] <= y1
-  );
+
+    circles.classed(
+      "selected",
+      d =>
+        projection([d.long, d.lat]) != null &&
+        x0 <= projection([d.long, d.lat])[0] &&
+        projection([d.long, d.lat])[0] <= x1 &&
+        y0 <= projection([d.long, d.lat])[1] &&
+        projection([d.long, d.lat])[1] <= y1
+    );
 
   console.log(circles.classed());
 
