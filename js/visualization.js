@@ -26,9 +26,6 @@
     .selectionDispatcher(d3.dispatch(dispatchString))
       ("#map", data);
 
-
-
-
     // When the line chart selection is updated via brushing,
     // tell the scatterplot to update it's selection (linking)
     map.selectionDispatcher().on(dispatchString, function(selectedData) {

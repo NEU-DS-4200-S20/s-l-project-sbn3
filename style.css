@@ -124,7 +124,7 @@ table {
 	display: block;
 	height: 700px;
 	overflow: auto;
-  font-size: 14px;
+  font-size: 13px;
   border-collapse: separate;
   /* vertical | horizontal */
   border-spacing: 0 0;
@@ -149,7 +149,7 @@ td, th {
 	padding: 1px 4px;
 	border: 1px black solid;
   }
-  
+
 
 /* Recreate the D3 brush style... */
 tr.mouseover {
