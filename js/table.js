@@ -13,6 +13,7 @@ function table() {
   function chart(selector, data) {
     let table = d3.select(selector)
       .append("table")
+        .style("border", "2px black solid")
         .classed("my-table", true);
 
     // Here, we grab the labels of the first item in the dataset

@@ -144,6 +144,13 @@ table.text-unselectable {
   cursor: default;
 }
 
+
+td, th {
+	padding: 1px 4px;
+	border: 1px black solid;
+  }
+  
+
 /* Recreate the D3 brush style... */
 tr.mouseover {
   background-color: #d6d6d6;
