@@ -89,6 +89,8 @@ function table() {
     function update() {
       let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
       dispatcher.call(dispatchString, this, table.selectAll(".selected").data());
+      //console.log("table sent");
+      //console.log(table.selectAll(".selected").data());
     }
 
     return chart;
@@ -108,6 +110,8 @@ function table() {
 
     // Select an element if its datum was selected
     d3.selectAll('tr').classed("selected", d => {
+      //console.log(selectedData);
+      console.log(selectedData.includes(d));
       return selectedData.includes(d)
     });
   };

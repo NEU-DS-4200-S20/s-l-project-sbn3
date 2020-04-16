@@ -22,7 +22,7 @@
     // Create a line chart given x and y attributes, labels, offsets;
     // a dispatcher (d3-dispatch) for selection events;
     // a div id selector to put our svg in; and the data to use.
-    let map = mapVis(700, 700)
+    let map = mapVis()
     .selectionDispatcher(d3.dispatch(dispatchString))
       ("#map", data);
 

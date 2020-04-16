@@ -96,12 +96,14 @@ h1, h2, h3 {
   pointer-events: none;
 }
 
-.adds {
+.point {
   fill: orange;
-  r : 4;
+	r: 4;
+	stroke: #69b3a2;
+  stroke-width : 1;
 }
 
-.adds.selected {
+.point.selected {
   fill: red;
 }
 

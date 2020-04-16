@@ -1,21 +1,18 @@
-function mapVis(w, h) {
+function mapVis() {
 
   //Immediately Invoked Function Expression to limit access to our
   // variables and prevent
-  var width = w;
-  var height = h;
 
-  let selectableElements = d3.select(null)
+  var width = 700, height = 700;
+
+  var selectableElements = d3.select(null);
+  var ourbrush = null;
+  var dispatcher;
 
   function map(selector, data) {
-    var svg = d3
-    .select("#vis-svg")
-    //.append("svg")
+    var svg = d3.select("#vis-svg")
     .attr("width", width)
     .attr("height", height);
-    // .call(d3.zoom().on("zoom", function () {
-    //   svg.attr("transform", d3.event.transform)
-    // }));
 
     var projection = d3
     .geoAlbersUsa()
@@ -24,53 +21,14 @@ function mapVis(w, h) {
 
     var path = d3.geoPath().projection(projection);
 
-    // var zoom = d3.zoom()
-    // .scaleExtent([1, 80])
-    // .on("zoom", zoomed);
-    // translate(-1296.4392968337975,-601.2308973885007) scale(4.972598675615854)
-
-    var button = d3.select("#toggleBrush");
-    var brushEnabled = false;
-
-    function toggleBrush() {
-      if (brushEnabled) {
-        button.attr("value", "Disable Zooming");
-        // svg.append("g").call(brush); << appears after clicking button twice
-      } else {
-        button.attr("value", "Zoom over Map");
-      }
-      brushEnabled = !brushEnabled;
-    }
-
     d3.json("us.json", function(us) {
-      d3.csv("data/SBN3DataMap.csv", function(data) {
         drawMap(us, data);
-
-        /*let tableData = table()
-        .selectionDispatcher(d3.dispatch(dispatchString))
-        ("#table", data);
-
-        tableData.selectionDispatcher().on(dispatchString, function(selectedData){
-          // TODO: fill in with map data, brushing */
-      });
     });
 
-    var mapGroup = svg.append("g").attr("class", "mapGroup");
-
-    //svg.call(zoom);
-
-    // var tableGroup = svg.append("g").attr("class", "tableGroup");
-
-    var brush = d3
-    .brush()
-    .on("start brush", highlight)
-    .on("end", brushend);
 
     function drawMap(us, data) {
 
-      mapGroup
-      //.append("g")
-      // .attr("id", "states")
+      svg.append("g")
       .selectAll("path")
       .data(topojson.feature(us, us.objects.states).features)
       .enter()
@@ -78,7 +36,7 @@ function mapVis(w, h) {
       .attr("d", path)
       .attr("class", "states");
 
-      mapGroup
+      svg.append("g")
       .append("path")
       .datum(
         topojson.mesh(us, us.objects.states, function(a, b) {
@@ -88,12 +46,15 @@ function mapVis(w, h) {
       .attr("id", "state-borders")
       .attr("d", path);
 
-      var circles = mapGroup
-      .selectAll("circle")
-      .data(data)
-      .enter()
-      .append("circle")
-      .attr("class", "adds")
+      var points = svg.append("g")
+      .selectAll(".mapPoint")
+      .data(data);
+
+      points.exit().remove();
+
+      points = points.enter().
+      append("circle")
+      .attr("class", "point mapPoint")
       .attr("cx", function(d) {
         if (projection([d.long, d.lat]) != null) {
           return projection([d.long, d.lat])[0];
@@ -109,72 +70,72 @@ function mapVis(w, h) {
         }
       });
 
-      selectableElements = circles;
+      selectableElements = points;
 
-      svg.append("g").call(brush);
+      svg.call(brush);
     }
 
-    function highlight() {
-      if (d3.event.selection === null) return;
+    function brush(g) {
+      const brush = d3.brush() // Create a 2D interactive brush
+      .on("start brush", highlight) // When the brush starts/continues do...
+      .on("end", brushend);
 
-      let [[x0, y0], [x1, y1]] = d3.event.selection;
+      ourbrush = brush;
 
-      circles = d3.selectAll("circle");
+      g.call(brush);
 
 
-        circles.classed(
-          "selected",
-          d =>
-            projection([d.long, d.lat]) != null &&
-            x0 <= projection([d.long, d.lat])[0] &&
-            projection([d.long, d.lat])[0] <= x1 &&
-            y0 <= projection([d.long, d.lat])[1] &&
-            projection([d.long, d.lat])[1] <= y1
-        );
+      function highlight() {
+        if (d3.event.selection === null) return;
 
-        // Get the name of our dispatcher's event
-          let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+        const [[x0, y0], [x1, y1]] = d3.event.selection;
 
-          // Let other charts know about our selection
-          dispatcher.call(dispatchString, this, svg.selectAll(".selected").data());
+        circles = d3.selectAll("circle");
 
+        circles.classed("selected", d =>
+        projection([d.long, d.lat]) != null &&
+        x0 <= projection([d.long, d.lat])[0] &&
+        projection([d.long, d.lat])[0] <= x1 &&
+        y0 <= projection([d.long, d.lat])[1] &&
+        projection([d.long, d.lat])[1] <= y1
+      );
+
+      // Get the name of our dispatcher's event
+      let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
+
+      // Let other charts know about our selection
+      dispatcher.call(dispatchString, this, svg.selectAll(".selected").data());
+      //console.log("map sent");
+      //console.log(svg.selectAll(".selected").data());
     }
 
     function brushend() {
       if(d3.event.sourceEvent.type!="end"){
-          d3.select(this).call(brush.move, null);
-        }   
+        d3.select(this).call(brush.move, null);
+      }
     }
-    return map;
   }
-
-  //mapGroup.attr("transform", "translate(-1296.4392968337975,-601.2308973885007) scale(4.972598675615854)");
-
-  // function zoomed() {
-  //   if (!brushEnabled){
-  //     mapGroup.selectAll("path").style("stroke-width", 1.5 / d3.event.transform.k + "px");
-  //     mapGroup.selectAll("circle").style("r", 4 / d3.event.transform.k);
-  //     mapGroup.attr("transform", d3.event.transform); // updated for d3 v4
-  //   }
-  // }
-  // Gets or sets the dispatcher we use for selection events
-  map.selectionDispatcher = function (_) {
-    if (!arguments.length) return dispatcher;
-    dispatcher = _;
-    return map;
-  };
-
-  // Given selected data from another visualization
-  // select the relevant elements here (linking)
-  map.updateSelection = function (selectedData) {
-    if (!arguments.length) return;
-
-    // Select an element if its datum was selected
-    selectableElements.classed("selected", d => {
-      return selectedData.includes(d)
-    });
-
-  };
-
   return map;
+}
+
+// Gets or sets the dispatcher we use for selection events
+map.selectionDispatcher = function (_) {
+  if (!arguments.length) return dispatcher;
+  dispatcher = _;
+  return map;
+};
+
+// Given selected data from another visualization
+// select the relevant elements here (linking)
+map.updateSelection = function (selectedData) {
+  if (!arguments.length) return;
+
+  // Select an element if its datum was selected
+  selectableElements.classed("selected", d => {
+    return selectedData.includes(d)
+  });
+
+};
+
+return map;
 }
