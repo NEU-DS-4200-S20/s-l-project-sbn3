@@ -1,4 +1,4 @@
-Please select Member Type,Name of Business or Organization,Product or Service,Address(Address1),Address (Address2),Address (City),Address (State),Address (Zip),Business Phone,Business/Organization Website,Website2,Geocode,lat,long,,
+Type,Name,Product,Address,Address (Address2),City,State,Zip,Phone,Website,Website2,Geocode,lat,long,,
 Business/Non-Profit,B-Organic,Produce storage bags,7 Lambert Cir,,Worcester,MA,01605,508-545-4115,b-organicma.com,,"42.3092735, -71.8246059",42.3092735,-71.8246059,,
 Business/Non-Profit,Balanced Rock Advisors,"Financial planning, wealth management",1408 Centre St,,Roslindale,MA,02131,(617) 971-8323,balancedrockinvestmentadvisors.com/,,"42.2940107, -71.1360785",42.2940107,-71.1360785,,
 Business/Non-Profit,Basil Tree Catering,Corporate catering,10 Fawcett Street,,Cambridge,MA,02138,(617) 776-9100,www.basiltree.com,,"42.389329, -71.1453622",42.389329,-71.1453622,,

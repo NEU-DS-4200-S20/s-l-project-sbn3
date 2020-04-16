@@ -11,10 +11,7 @@ function table() {
   // Create the chart by adding an svg to the div with the id
   // specified by the selector using the given data
   function chart(selector, data) {
-    let table = d3.select("div.vis-holder")
-    //.append("foreignObject")
-    // .attr("width", 500)
-    // .attr("height", 100)
+    let table = d3.select(selector)
       .append("table")
         .classed("my-table", true);
 
@@ -32,6 +29,8 @@ function table() {
     for (header of tableHeaders) {
       table.select("thead").append("th").text(header);
     }
+
+    console.log(table.selectAll("tr").selectAll(".selected"));
 
     let tr = table.selectAll("tr")
       .data(data)
@@ -89,8 +88,6 @@ function table() {
     function update() {
       let dispatchString = Object.getOwnPropertyNames(dispatcher._)[0];
       dispatcher.call(dispatchString, this, table.selectAll(".selected").data());
-      //console.log("table sent");
-      //console.log(table.selectAll(".selected").data());
     }
 
     return chart;
@@ -111,7 +108,7 @@ function table() {
     // Select an element if its datum was selected
     d3.selectAll('tr').classed("selected", d => {
       //console.log(selectedData);
-      console.log(selectedData.includes(d));
+      //console.log(selectedData.includes(d));
       return selectedData.includes(d)
     });
   };
