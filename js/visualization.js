@@ -15,14 +15,14 @@
     // Create a table given the following:
     // a dispatcher (d3-dispatch) for selection events;
     // a div id selector to put our table in; and the data to use.
-    let tableData = table()
+    var tableData = table()
       .selectionDispatcher(d3.dispatch(dispatchString))
       ("div.vis-holder", data);
 
     // Create a line chart given x and y attributes, labels, offsets;
     // a dispatcher (d3-dispatch) for selection events;
     // a div id selector to put our svg in; and the data to use.
-    let map = mapVis()
+    var map = mapVis()
     .selectionDispatcher(d3.dispatch(dispatchString))
       ("#map", data);
 

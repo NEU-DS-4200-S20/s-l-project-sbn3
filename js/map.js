@@ -16,8 +16,9 @@ function mapVis() {
 
     var projection = d3
     .geoAlbersUsa()
-    .translate([width / 2, height / 2])
-    .scale(width);
+     .scale(width * 4.5)
+     .translate([-width / 1.5, height * .95]);
+
 
     var path = d3.geoPath().projection(projection);
 
@@ -27,14 +28,13 @@ function mapVis() {
 
 
     function drawMap(us, data) {
-
       svg.append("g")
       .selectAll("path")
       .data(topojson.feature(us, us.objects.states).features)
       .enter()
       .append("path")
       .attr("d", path)
-      .attr("class", "states");
+      .attr("class", "states")
 
       svg.append("g")
       .append("path")
@@ -80,7 +80,7 @@ function mapVis() {
       .on("start brush", highlight) // When the brush starts/continues do...
       .on("end", brushend);
 
-      ourbrush = brush;
+      //ourbrush = brush;
 
       g.call(brush);
 
@@ -117,6 +117,8 @@ function mapVis() {
   }
   return map;
 }
+
+
 
 // Gets or sets the dispatcher we use for selection events
 map.selectionDispatcher = function (_) {

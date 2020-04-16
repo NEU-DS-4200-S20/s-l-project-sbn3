@@ -4,77 +4,49 @@ function table() {
 
   // Based on Mike Bostock's margin convention
   // https://bl.ocks.org/mbostock/3019563
-  let ourBrush = null,
-    selectableElements = d3.select(null),
-    dispatcher;
+  var ourBrush = null,
+  selectableElements = d3.select(null),
+  dispatcher;
 
   // Create the chart by adding an svg to the div with the id
   // specified by the selector using the given data
   function chart(selector, data) {
-    let table = d3.select(selector)
-      .append("table")
-        .style("border", "2px black solid")
-        .classed("my-table", true);
+    var table = d3.select(selector)
+    .append("table")
+    .style("border", "2px black solid")
+    .classed("my-table", true);
 
+    // https://gist.github.com/jfreels/6814721
+    function tabulate(data,columns) {
+      var thead = table.append('thead')
+      var tbody = table.append('tbody')
 
+      thead.append('tr')
+      .selectAll('th')
+      .data(columns)
+      .enter()
+      .append('th')
+      .text(function (d) { return d })
 
+      var rows = tbody.selectAll('tr')
+      .data(data)
+      .enter()
+      .append('tr')
 
-        function tabulate(data,columns) {
-          var thead = table.append('thead')
-          var tbody = table.append('tbody')
+      var cells = rows.selectAll('td')
+      .data(function(row) {
+        return columns.map(function (column) {
+          return { column: column, value: row[column] }
+        })
+      })
+      .enter()
+      .append('td')
+      .text(function (d) { return d.value })
 
-          thead.append('tr')
-          .selectAll('th')
-          .data(columns)
-          .enter()
-          .append('th')
-          .text(function (d) { return d })
+      return table;
+    }
 
-          var rows = tbody.selectAll('tr')
-          .data(data)
-          .enter()
-          .append('tr')
-
-          var cells = rows.selectAll('td')
-          .data(function(row) {
-            return columns.map(function (column) {
-              return { column: column, value: row[column] }
-            })
-          })
-          .enter()
-          .append('td')
-          .text(function (d) { return d.value })
-
-          return table;
-        }
-
-        table = tabulate(data, ["Name", "Product", "Address", "City", "State", "Zip", "Phone", "Website"]);
-    // // Here, we grab the labels of the first item in the dataset
-    // //  and store them as the headers of the table.
-    // let tableHeaders = Object.keys(data[0]);
-    //
-    // // You should append these headers to the <table> element as <th> objects inside
-    // // a <th>
-    // // See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table
-    // console.log(data.Name);
-    // // YOUR CODE HERE
-    // table.append("thead");
-    //
-    // for (header of tableHeaders) {
-    //   table.select("thead").append("th").text(header);
-    // }
-    //
-    // console.log(table.selectAll("tr").selectAll(".selected"));
-    //
-    // let rows = table.selectAll("tr")
-    //   .data(data)
-    //   .enter()
-    //   .append("tr");
-    //
-    // let cells = rows.selectAll("td")
-    //   .data(function(d, i) { return Object.values(d); })
-    //   .enter().append("td")
-    //   .text(function(d) { return d; });
+    table = tabulate(data, ["Name", "Product", "Address", "City", "State", "Zip", "Phone", "Website"]);
 
     table.classed("text-unselectable", true);
 
@@ -127,6 +99,8 @@ function table() {
 
     return chart;
   }
+
+  
 
   // Gets or sets the dispatcher we use for selection events
   chart.selectionDispatcher = function (_) {
