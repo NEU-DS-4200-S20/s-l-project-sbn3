@@ -98,7 +98,7 @@ h1, h2, h3 {
 
 .point {
   fill: orange;
-	r: 4;
+  r: 5;
 	stroke: #69b3a2;
   stroke-width : 1;
 }

@@ -1,42 +1,49 @@
 function mapVis() {
 
-  //Immediately Invoked Function Expression to limit access to our
-  // variables and prevent
-
   let width = 700, height = 700;
 
   let selectableElements = d3.select(null);
-  let ourbrush = null;
   let dispatcher;
 
   function map(selector, data) {
+
     let svg = d3.select("#vis-svg")
     .attr("width", width)
     .attr("height", height);
 
+    let gr = svg.append("g");
+
     let projection = d3
     .geoAlbersUsa()
-     .scale(width * 4.5)
-     .translate([-width / 1.5, height * .95]);
+    .scale(width * 4.5)
+    .translate([-width / 1.5, height * .95]);
 
 
     let path = d3.geoPath().projection(projection);
 
+
     d3.json("us.json", function(us) {
-        drawMap(us, data);
+      drawMap(us, data);
     });
 
-
     function drawMap(us, data) {
-      svg.append("g")
+
+
+      const zoom = d3.zoom()
+      .extent([[0, 0], [width, height]])
+      .scaleExtent([1, 50])
+      .on("zoom", zoomed);
+
+      gr.append("g")
       .selectAll("path")
       .data(topojson.feature(us, us.objects.states).features)
       .enter()
       .append("path")
-      .attr("d", path)
-      .attr("class", "states")
+        .on("click", clicked)
+        .attr("d", path)
+      .attr("class", "states");
 
-      svg.append("g")
+      gr.append("g")
       .append("path")
       .datum(
         topojson.mesh(us, us.objects.states, function(a, b) {
@@ -46,14 +53,14 @@ function mapVis() {
       .attr("id", "state-borders")
       .attr("d", path);
 
-      let points = svg.append("g")
+      let points = gr.append("g")
       .selectAll(".mapPoint")
       .data(data);
 
       points.exit().remove();
 
-      points = points.enter().
-      append("circle")
+      points = points.enter()
+      .append("circle")
       .attr("class", "point mapPoint")
       .attr("cx", function(d) {
         if (projection([d.long, d.lat]) != null) {
@@ -72,17 +79,38 @@ function mapVis() {
 
       selectableElements = points;
 
-      svg.call(brush);
+      gr.call(brush);
+
+      gr.call(zoom);
+
+      function clicked(d) {
+        const [[x0, y0], [x1, y1]] = path.bounds(d);
+        d3.event.stopPropagation();
+        gr.transition().duration(750).call(
+          zoom.transform,
+          d3.zoomIdentity
+          .translate(width / 2, height / 2)
+          .scale(Math.min(8, 0.9 / Math.max((x1 - x0) / width, (y1 - y0) / height)))
+          .translate(-(x0 + x1) / 2, -(y0 + y1) / 2),
+          d3.mouse(gr.node())
+        );
+      }
+
+      function zoomed() {
+        gr.attr("transform", d3.event.transform);
+        d3.selectAll("circle.point.mapPoint").attr("r", 5 / (d3.event.transform.k));
+      }
+
     }
 
     function brush(g) {
       const brush = d3.brush() // Create a 2D interactive brush
       .on("start brush", highlight) // When the brush starts/continues do...
-      .on("end", brushend);
+      .on("end", brushend); // When the brush ends do...
 
-      //ourbrush = brush;
+      ourbrush = brush;
 
-      g.call(brush);
+      gr.call(brush);
 
 
       function highlight() {
@@ -105,8 +133,6 @@ function mapVis() {
 
       // Let other charts know about our selection
       dispatcher.call(dispatchString, this, svg.selectAll(".selected").data());
-      //console.log("map sent");
-      //console.log(svg.selectAll(".selected").data());
     }
 
     function brushend() {
@@ -114,7 +140,10 @@ function mapVis() {
         d3.select(this).call(brush.move, null);
       }
     }
+
+
   }
+
   return map;
 }
 
