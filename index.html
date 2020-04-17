@@ -56,97 +56,101 @@
     <!-- Change viewbox to whatever you want, e.g. "0 0 1000 6000" This determines your aspect ratio and coordinate system -->
     <!-- Delete all the sample SVG code below after the viewbox to before the closing tag. Populate this part of the SVG with D3. -->
     <svg id="vis-svg"
-      preserveAspectRatio="xMidYMid meet"
-      class="marks"
-      viewBox="0 0 821 520"
-      version="1.1"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink">
+    preserveAspectRatio="xMidYMid meet"
+    class="marks"
+    viewBox="0 0 821 520"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink">
 
     <!-- Don't delete the closing tag! -->
-    </svg>
-    <!-- <input name="updateBrush"
-         type="button"
-         value="Enable Brushing"
-         onclick="toggleBrush()"
-         id="toggleBrush" /> -->
-  </div>
+  </svg>
+  <!-- <input name="updateBrush"
+  type="button"
+  value="Enable Brushing"
+  onclick="toggleBrush()"
+  id="toggleBrush" /> -->
+</div>
 
-  <!-- Your writeup goes here -->
-  <div class = "content-column">
+<!-- Your writeup goes here -->
+<div class = "content-column">
 
-    <h1>Demo Video</h1>
+  <h1>Demo Video</h1>
 
-    <p><em>Embedded MP4 demo video using the HTML5 &lt;video&gt; tag. For example, this screen recording Prof. Cody Dunne made of Mike Bostock's flexible transitions in D3 slide:</em></p>
+  <p><em>Embedded MP4 demo video using the HTML5 &lt;video&gt; tag. For example, this screen recording Prof. Cody Dunne made of Mike Bostock's flexible transitions in D3 slide:</em></p>
 
-    <video controls width="100%">
-      <source src="http://www.ccs.neu.edu/home/cody/courses/shared/d3-flexible-transitions.mp4" type="video/mp4">
+  <video controls width="100%">
+    <source src="http://www.ccs.neu.edu/home/cody/courses/shared/d3-flexible-transitions.mp4" type="video/mp4">
       <p>Your browser doesn't support HTML5 video. Here is
-       a <a href="http://www.ccs.neu.edu/home/cody/courses/shared/d3-flexible-transitions.mp4">link to the video</a> instead.</p>
-    </video>
+        a <a href="http://www.ccs.neu.edu/home/cody/courses/shared/d3-flexible-transitions.mp4">link to the video</a> instead.</p>
+      </video>
 
-    <h1>Visualization explanation</h1>
+      <h1>Visualization explanation</h1>
 
-    <p><em>Final visualization screenshots (PNG images), design justifications, UI walk-through, and linked presentation slides.</em></p>
+      <p><em>Final visualization screenshots (PNG images), design justifications, UI walk-through, and linked presentation slides.</em></p>
 
-    <h1>Data Analysis</h1>
-    <p><b>Summary of data</b></p>
-    <p><em>The data given to us by SBN gives an overview of the members in the network including some basic information about each member. There are columns for the member type, name of the business or organization, product/service type, address information, phone number and email. The majority of the data given was categorical. </em></p>
-    <p><b>Data Preprocessing</b></p>
-    <p><em>
-    We found that several of the columns lacked information. Specifically, the address column was missing data for nearly 30 organizations. We were able to fill in most of the missing data simply by searching for the information on Google. However, some organizations still had missing addresses and we assume that is because they lack a physical (brick and mortar) presence.
-    </em></p>
-    <p><em>Lastly, we had to find the latitude and longitude for all the organizations in our dataset in order to plot it on the map. We used a google script that consist of a simple function which returns the latitude and longitude values for given address using the Google Maps Geocoder.</em></p>
-    <p><em>After we finalized our dataset, we started working on creating our visualization!</em></p>
+      <h1>Data Analysis</h1>
+      <p><b>Summary of data</b></p>
+      <p><em>The data given to us by SBN gives an overview of the members in the network including some basic information about each member. There are columns for the member type, name of the business or organization, product/service type, address information, phone number and email. The majority of the data given was categorical. </em></p>
+      <p><b>Data Preprocessing</b></p>
+      <p><em>
+        We found that several of the columns lacked information. Specifically, the address column was missing data for nearly 30 organizations. We were able to fill in most of the missing data simply by searching for the information on Google. However, some organizations still had missing addresses and we assume that is because they lack a physical (brick and mortar) presence.
+      </em></p>
+      <p><em>Lastly, we had to find the latitude and longitude for all the organizations in our dataset in order to plot it on the map. We used a google script that consist of a simple function which returns the latitude and longitude values for given address using the Google Maps Geocoder.</em></p>
+      <p><em>After we finalized our dataset, we started working on creating our visualization!</em></p>
 
-    <h1>Task Analysis</h1>
+      <h1>Task Analysis</h1>
 
-    <p><em>There are various business in the local community of New England. SBN is willing to build up a strong connection among them to facilitate their collaboration and establish conducive business environments. Our domain task is to clearly showcase the organizations to everyone who will use our visualization.</em></p>
+      <p><em>There are various business in the local community of New England. SBN is willing to build up a strong connection among them to facilitate their collaboration and establish conducive business environments. Our domain task is to clearly showcase the organizations to everyone who will use our visualization.</em></p>
 
-    <p><em>We intend to help users to gain awareness of the location, business and contact information by utilizing interactive map and table. Users are allowed to zoom in and out and gather any further information they want by playing with the visualization.</em></p>
+      <p><em>We intend to help users to gain awareness of the location, business and contact information by utilizing interactive map and table. Users are allowed to zoom in and out and gather any further information they want by playing with the visualization.</em></p>
 
-    <p><em>Our visualization aims to clearly 'present' and make a 'summary/overview' about the local business in the community of New England. Users can 'explore' information they want from our visualization.</em></p>
+      <p><em>Our visualization aims to clearly 'present' and make a 'summary/overview' about the local business in the community of New England. Users can 'explore' information they want from our visualization.</em></p>
 
-    <h1>Design Process</h1>
+      <h1>Design Process</h1>
 
-    <p><em>We designed our visualization iteratively through first finding examples, then making a sketch, and finally creating a mockup in Tableau</em></p>
+      <p><em>We designed our visualization iteratively through first finding examples, then making a sketch, and finally creating a mockup in Tableau.</em></p>
+      <p><em>Our first step designing our visualizations was to take inspiration from visualizations that have already been made for similar functions. To do this, we all set out to find a visualization that related to the tasks we were trying to complete. We wanted to see different layouts, features, and general ideas that we could mold into our own.</em></p>
+      <p><em>Next, we sketched out a few ideas we had for visualizations. These sketches were, for the most part, directly inspired by the working examples. The goal was to place different elements and see how they looked before actually coding anything. This way, we could move into making an interactive version efficiently.</em></p>
+      <p><em>Finally, we created a working mockup in Tableau. This was very easy, and we were able to connect our data to show both a map of the member locations, as well as have a filterable table on the side. These are elements that are more difficult to do in D3, so Tableau was very useful in that aspect. Through making these interactive visualizations, we were able to see what worked with our ideas and what did not.
+      </em></p>
 
-    <p>Example visualization from <a href="https://www.geopointe.com/features/">here</a></p>
+      <p>Example visualization from <a href="https://www.geopointe.com/features/">here</a></p>
 
-    <img src="images\example_image.png" style="width:500px;" alt="Example image from https://www.geopointe.com/features/">
+      <img src="images\example_image.png" style="width:500px;" alt="Example image from https://www.geopointe.com/features/">
 
-    <p>Illustrated map by Ruisong</p>
-    <img src="images\ruisong_map.png" style="width:500px;" alt="Illustrated map">
+      <p>Illustrated map by Ruisong</p>
+      <img src="images\ruisong_map.png" style="width:500px;" alt="Illustrated map">
 
-    <p>Mockup in Tableau</p>
-    <img src="images\mockup.png" style="width:500px;" alt="Mockup in Tableau">
-
-
-    <h1>Conclusion</h1>
-
-    <p><em>Short summary of work completed and areas for improvement/future-work.</em></p>
-
-    <p><em>Expectation: Meaningfully wraps up project and has good future directions.</em></p>
+      <p>Mockup in Tableau</p>
+      <img src="images\mockup.png" style="width:500px;" alt="Mockup in Tableau">
 
 
-    <h1>Acknowledgments</h1>
+      <h1>Conclusion</h1>
 
-    <p><em>List here where any code, packages/libraries, text, images, designs, etc. that you leverage come from.</em></p>
+      <p><em>Short summary of work completed and areas for improvement/future-work.</em></p>
 
-    <ul>
-      <li><a href="https://d3js.org/">D3: Data-Driven Documents</a> by Mike Bostock.</li>
-      <li><a href="https://codepo8.github.io/css-fork-on-github-ribbon/#">Pure CSS responsive "Fork me on GitHub" ribbon</a> by Chris Heilmann.</li>
-    </ul>
-
-  </div>
-
-  <!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
-  <script src="lib/d3.v4/d3.v4.js"></script>
-  <script src="js/map.js"></script>
-  <script src="js/table.js"></script>
-  <script src="js/visualization.js"></script>
+      <p><em>Expectation: Meaningfully wraps up project and has good future directions.</em></p>
 
 
-  <script src="https://d3js.org/topojson.v3.min.js"></script>
-</body>
-</html>
+      <h1>Acknowledgments</h1>
+
+      <p><em>List here where any code, packages/libraries, text, images, designs, etc. that you leverage come from.</em></p>
+
+      <ul>
+        <li><a href="https://d3js.org/">D3: Data-Driven Documents</a> by Mike Bostock.</li>
+        <li><a href="https://codepo8.github.io/css-fork-on-github-ribbon/#">Pure CSS responsive "Fork me on GitHub" ribbon</a> by Chris Heilmann.</li>
+      </ul>
+
+    </div>
+
+    <!-- Scripts at the end avoid need for dealing with async, defer, or onload event handlers -->
+    <script src="lib/d3.v4/d3.v4.js"></script>
+    <script src="js/map.js"></script>
+    <script src="js/table.js"></script>
+    <script src="js/visualization.js"></script>
+
+
+    <script src="https://d3js.org/topojson.v3.min.js"></script>
+  </body>
+  </html>
