@@ -150,6 +150,15 @@ td, th {
 	border: 1px black solid;
   }
 
+li {
+	font-size: medium;
+	text-align-last: start;
+}
+
+p {
+	font-size: large;
+	text-align: justify;
+}
 
 /* Recreate the D3 brush style... */
 tr.mouseover {
