@@ -15,8 +15,8 @@ function mapVis() {
 
     let projection = d3
     .geoAlbersUsa()
-    .scale(width * 4.5)
-    .translate([-width / 1.5, height * .95]);
+    .scale(width * 3)
+    .translate([-width / 5, height * .6]);
 
 
     let path = d3.geoPath().projection(projection);
@@ -31,7 +31,7 @@ function mapVis() {
 
       const zoom = d3.zoom()
       .extent([[0, 0], [width, height]])
-      .scaleExtent([1, 50])
+      .scaleExtent([1, 30])
       .on("zoom", zoomed);
 
       gr.append("g")
@@ -75,7 +75,8 @@ function mapVis() {
         } else {
           return;
         }
-      });
+      })
+      .attr("r", 3);
 
       selectableElements = points;
 
@@ -98,7 +99,9 @@ function mapVis() {
 
       function zoomed() {
         gr.attr("transform", d3.event.transform);
-        d3.selectAll("circle.point.mapPoint").attr("r", 5 / (d3.event.transform.k));
+        gr.attr("stroke-width", 1 / d3.event.transform.k);
+        d3.selectAll(".point").attr("r", 3);
+        console.log("ran");
       }
 
     }
