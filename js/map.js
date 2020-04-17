@@ -3,24 +3,24 @@ function mapVis() {
   //Immediately Invoked Function Expression to limit access to our
   // variables and prevent
 
-  var width = 700, height = 700;
+  let width = 700, height = 700;
 
-  var selectableElements = d3.select(null);
-  var ourbrush = null;
-  var dispatcher;
+  let selectableElements = d3.select(null);
+  let ourbrush = null;
+  let dispatcher;
 
   function map(selector, data) {
-    var svg = d3.select("#vis-svg")
+    let svg = d3.select("#vis-svg")
     .attr("width", width)
     .attr("height", height);
 
-    var projection = d3
+    let projection = d3
     .geoAlbersUsa()
      .scale(width * 4.5)
      .translate([-width / 1.5, height * .95]);
 
 
-    var path = d3.geoPath().projection(projection);
+    let path = d3.geoPath().projection(projection);
 
     d3.json("us.json", function(us) {
         drawMap(us, data);
@@ -46,7 +46,7 @@ function mapVis() {
       .attr("id", "state-borders")
       .attr("d", path);
 
-      var points = svg.append("g")
+      let points = svg.append("g")
       .selectAll(".mapPoint")
       .data(data);
 
