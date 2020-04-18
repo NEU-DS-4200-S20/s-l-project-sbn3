@@ -37,8 +37,11 @@ Make sure you publish your project to github pages, and put the URL here: https:
 
 ## Folders
 Each folder has an explanatory `README.md` file
+* `css` styling for the visualizations 
 
 * `data` is where you will put your data files.
+
+  * `SBN3DataMap.csv` the data used for the project which holds the information for the members that will be plotted on the map
 
 * `favicons` contains the favicons for the course projects. You shouldn't change anything here.
 
@@ -49,6 +52,10 @@ Each folder has an explanatory `README.md` file
 * `js` will contain all JavaScript files you write.
 
   * `visualization.js` is the main code that builds all your visualizations. Each visualization should be built following the [Reusable Chart model](https://bost.ocks.org/mike/chart/)
+
+  * `table.js` is the code that creates and manipulates the table in the visualization
+
+  * `map.js`is the code that creates and manipulates the map in the visualization
   
 * `lib` will contain any JavaScript library you use. It currently includes D3.
 
