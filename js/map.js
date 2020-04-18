@@ -1,3 +1,4 @@
+// used to create our map visualization
 function mapVis() {
 
   let width = 700, height = 700;
@@ -6,43 +7,44 @@ function mapVis() {
   let dispatcher;
 
   function map(selector, data) {
-
+    // the svg we are working in
     let svg = d3.select("#vis-svg")
     .attr("width", width)
     .attr("height", height);
 
+    // a "g" for everything to append to
     let gr = svg.append("g");
 
+    // projection used for map
     let projection = d3
     .geoAlbersUsa()
     .scale(width * 3)
     .translate([-width / 5, height * .6]);
 
-
     let path = d3.geoPath().projection(projection);
 
-
+    // us states data
     d3.json("us.json", function(us) {
       drawMap(us, data);
     });
 
     function drawMap(us, data) {
-
-
+      // zoom initialization
       const zoom = d3.zoom()
       .extent([[0, 0], [width, height]])
       .scaleExtent([1, 30])
       .on("zoom", zoomed);
 
+      // state borders
       gr.append("g")
       .selectAll("path")
       .data(topojson.feature(us, us.objects.states).features)
       .enter()
       .append("path")
-        .on("click", clicked)
         .attr("d", path)
       .attr("class", "states");
 
+      // state borders
       gr.append("g")
       .append("path")
       .datum(
@@ -59,6 +61,7 @@ function mapVis() {
 
       points.exit().remove();
 
+      // entering points onto map according to lat and long
       points = points.enter()
       .append("circle")
       .attr("class", "point mapPoint")
@@ -79,10 +82,13 @@ function mapVis() {
 
       selectableElements = points;
 
+      // call to elements for brushing
       gr.call(brush);
 
+      // call to elements for zooming
       gr.call(zoom);
 
+      // double click zooming
       function clicked(d) {
         const [[x0, y0], [x1, y1]] = path.bounds(d);
         d3.event.stopPropagation();
@@ -96,13 +102,14 @@ function mapVis() {
         );
       }
 
+      // zooming
       function zoomed() {
         gr.attr("transform", d3.event.transform);
         gr.attr("stroke-width", 1 / d3.event.transform.k);
       }
-
     }
 
+    // brushing
     function brush(g) {
       const brush = d3.brush() // Create a 2D interactive brush
       .on("start brush", highlight) // When the brush starts/continues do...
@@ -112,7 +119,7 @@ function mapVis() {
 
       gr.call(brush);
 
-
+      // highlighting
       function highlight() {
         if (d3.event.selection === null) return;
 
@@ -135,13 +142,12 @@ function mapVis() {
       dispatcher.call(dispatchString, this, svg.selectAll(".selected").data());
     }
 
+    // for ending a brush stroke
     function brushend() {
       if(d3.event.sourceEvent.type!="end"){
         d3.select(this).call(brush.move, null);
       }
     }
-
-
   }
 
   return map;
@@ -165,7 +171,6 @@ map.updateSelection = function (selectedData) {
   selectableElements.classed("selected", d => {
     return selectedData.includes(d)
   });
-
 };
 
 return map;
