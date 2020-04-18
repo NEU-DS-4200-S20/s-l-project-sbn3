@@ -42,7 +42,7 @@
 
     <p>SBN was founded in 1988 as the nation’s first business trade association with a mission of making business a vehicle for social, environmental, and economic change. They envision a resilient world economy composed of thousands of inter-connected local economies that benefit the lives of all people and all living things. SBN endeavors to build a successful model in Massachusetts and New England that inspires others to join with SBN in growing the sustainable economy movement.</p>
 
-    <p>Our goal is to showcase the local communities of New England and the various businesses that contribute to SBN goals so that people can learn more about these organizations and hopefully support them. We thought it would be helpful to represent the strength of SBN's community on a map so that users can understand the scale of this organization and also quickly refer to a business in their vicinity that has been working with SBN</p>
+    <p>Our goal is to showcase the local communities of New England and the various businesses that contribute to SBN goals so that people can learn more about these organizations and hopefully support them. We thought it would be helpful to represent the strength of SBN's community on a map so that users can understand the scale of this organization and also quickly refer to a business in their vicinity that has been working with SBN. Users will also be able to refer to more information about businesses such as their address, phone number, website, and products.</p>
 
     <p>The visualization we created allows a user to explore all the organizations working with SBN by zooming in and out of the map or by clicking on the table below to find further information about a business. </p>
 
@@ -105,12 +105,10 @@
 
       <h1>Data Analysis</h1>
       <p><b>Summary of data</b></p>
-      <p> The data given to us by SBN gives an overview of the members in the network including some basic information about each member. There are columns for the member type, name of the business or organization, product/service type, address information, phone number and email. The majority of the data given was categorical.   </p>
+      <p> The data given to us by SBN gives an overview of the members in the network including some basic information about each member. There are columns for the member type, name of the business or organization, product/service type, address information, phone number and email. All the data provided was categorical.</p>
       <p><b>Data Preprocessing</b></p>
-      <p>
-        We found that several of the columns lacked information. Specifically, the address column was missing data for nearly 30 organizations. We were able to fill in most of the missing data simply by searching for the information on Google. However, some organizations still had missing addresses and we assume that is because they lack a physical (brick and mortar) presence.
-        </p>
-      <p> Lastly, we had to find the latitude and longitude for all the organizations in our dataset to plot it on the map. We used a google script that consist of a simple function which returns the latitude and longitude values for given address using the Google Maps Geocoder.  </p>
+      <p> We first pulled our data into an excel sheet to be able to more efficiently analyze it. We found that several of the columns lacked information. Specifically, the address column was missing data for nearly 30 organizations. We were able to fill in most of the missing data simply by searching for the information on Google. However, some organizations still had missing addresses and we assume that is because they lack a physical (brick and mortar) presence.</p>
+      <p> Lastly, we had to find the latitude and longitude for all the organizations in our dataset to plot it on the map. We used a script through Google Sheets that consisted of a simple function which returns the latitude and longitude values for given address using the Google Maps Geocoder. These addresses were created through the concatenation of the address, city, state, and zip code.</p>
       <p> After we finalized our dataset, we started working on creating our visualization!  </p>
 
       <h1>Task Analysis</h1>
