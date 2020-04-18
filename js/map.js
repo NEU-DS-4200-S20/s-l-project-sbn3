@@ -75,8 +75,7 @@ function mapVis() {
         } else {
           return;
         }
-      })
-      .attr("r", 3);
+      });
 
       selectableElements = points;
 
@@ -100,8 +99,6 @@ function mapVis() {
       function zoomed() {
         gr.attr("transform", d3.event.transform);
         gr.attr("stroke-width", 1 / d3.event.transform.k);
-        d3.selectAll(".point").attr("r", 3);
-        console.log("ran");
       }
 
     }
