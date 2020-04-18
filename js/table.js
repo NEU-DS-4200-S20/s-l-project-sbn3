@@ -1,5 +1,4 @@
-/* global D3 */
-
+// used to create our table visualization
 function table() {
 
   // Based on Mike Bostock's margin convention
@@ -8,14 +7,13 @@ function table() {
   selectableElements = d3.select(null),
   dispatcher;
 
-  // Create the chart by adding an svg to the div with the id
-  // specified by the selector using the given data
   function chart(selector, data) {
     let table = d3.select(selector)
     .append("table")
     .style("border", "2px black solid")
     .classed("my-table", true);
 
+    // function used to create a table using only certain columns
     // https://gist.github.com/jfreels/6814721
     function tabulate(data,columns) {
       let thead = table.append('thead')
@@ -46,13 +44,16 @@ function table() {
       return table;
     }
 
+    // creating a table with given columns
     table = tabulate(data, ["Name", "Product", "Address", "City", "State", "Zip", "Phone", "Website"]);
 
+    // makes the table text unhighlightable
     table.classed("text-unselectable", true);
 
     isMouseDown = false;
     isOver = false;
 
+    // used to improve brushing within table
     d3.selectAll("tr")
     .on("mouseover", (d, i, elements) => {
       isOver = true;
@@ -113,7 +114,7 @@ function table() {
   // select the relevant elements here (linking)
   chart.updateSelection = function (selectedData) {
     if (!arguments.length) return;
-    
+
     // Select an element if its datum was selected
     d3.selectAll('tr').classed("selected", d => {
       return selectedData.includes(d)
